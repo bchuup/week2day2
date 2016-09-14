@@ -21,7 +21,7 @@ var manyPrints = function (err, urls){ //urls is an array of urls which is produ
   for (imageUrl of urls){
     var idarr = imageUrl.match(/\d{2,}/)
     var id = idarr[0]
-    downloadImageByURL(imageUrl, `./pictures/${id}.png`, console.log)
+    downloadImageByURL(imageUrl, `./pictures/${id}.png`, console.log) // found a bug- pictures wont download unless pictures are already in folder
   }
 }
 
