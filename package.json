@@ -1,0 +1,26 @@
+{
+  "name": "week2day2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "download_avatarsDay2.js",
+  "dependencies": {
+    "chai": "^3.5.0",
+    "request": "^2.74.0"
+  },
+  "devDependencies": {
+    "mocha": "^3.0.2"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bchuup/week2day2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bchuup/week2day2/issues"
+  },
+  "homepage": "https://github.com/bchuup/week2day2#readme"
+}

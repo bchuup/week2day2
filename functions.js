@@ -11,11 +11,16 @@ var createAuthenticationObj = function (url, owner, repo){
 };
 
 var downloadImageByURL = function (url, path, callback) {
-  request(url)
-  .pipe(fs.createWriteStream(path))
-  .on('close', function() {
-    callback("download complete");
-  });
+  fs.access(path, fs.F_OK, (err) => { // ask how to read documentation re: fs.constants.F_OK
+    if (err){
+    console.log(err ? 'There is no folder to put your pictures!' : 'can read/write')
+    throw err
+    } else {
+    request(url)
+    .pipe(fs.createWriteStream(path))
+    .on('close', function() {callback("download complete")});
+    }
+  })
 }
 
 var manyPrints = function (err, urls){ //urls is an array of urls
@@ -28,6 +33,7 @@ var manyPrints = function (err, urls){ //urls is an array of urls
     downloadImageByURL(imageUrl, `./pictures/${id}.png`, console.log)
   }
 }
+
 
 
 
