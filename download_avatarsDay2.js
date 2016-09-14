@@ -1,3 +1,5 @@
+// all related functions are located in functions.js file and exported in using modular exports
+
 //Q for code review: why do we declare variables for require?
 var request = require("request")
 var func = require("./functions.js")
@@ -7,7 +9,7 @@ token = process.env.token
 // console.log(token)
 
 
-function getRepoContributors(repoOwner, repoName, callback) {
+function getRepoContributors(repoOwner, repoName, printing) {
   // console.log(arguments.length)
   if (!token){
       throw new Error('You have no token!');
@@ -18,7 +20,7 @@ function getRepoContributors(repoOwner, repoName, callback) {
   if (key === false){
       throw new Error('I can grab you some pictures but you got no .env file!');
   }
-    requestData = func.auth('https://api.github.com', repoOwner, repoName)
+    requestData = func.auth('https://api.github.com', repoOwner, repoName) // requesting data, func.auth is a function that provides authorization details
     request.get(requestData, function(err, response, body) {
         if (err) {
           throw (err);
@@ -35,7 +37,7 @@ function getRepoContributors(repoOwner, repoName, callback) {
           for (var everyObject of data){
             urlList.push(everyObject.avatar_url)
           }
-            callback(null, urlList)
+            printing(null, urlList) // printing function refers to func.manyPrints- prints all files into picture folder
         }
     })
 }
