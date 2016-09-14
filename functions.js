@@ -36,11 +36,10 @@ var downloadImageByURL = function (url, path, login, log) { //log is console.log
 var createEnv = function () { //log is console.log
   fs.access('.env', fs.F_OK, (err) => { // ask mentors how to read documentation re: fs.constants.F_OK
     if (err){
-      fs.writeFile(".env", " ", function(err) {
+      fs.writeFile(".env", "token = '\<YOUR TOKEN>'\ ", function(err) {
 
         if(err) {return console.log(err);}
       })
-    throw err
     }
   })
 }
