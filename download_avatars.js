@@ -11,13 +11,10 @@ token = process.env.token
 
 function getRepoContributors(repoOwner, repoName, getUrls) {
   if (!token){
-      throw new Error('You have no token!');
+    func.createEnv()
   }
   if (process.argv[3] === undefined || !(process.argv[4]===undefined)){
       throw new Error('Congratulations, you just played yourself. I need exactly TWO arguments!');
-  }
-  if (key === false){
-      throw new Error('I can grab you some pictures but you got no .env file!');
   }
     requestData = func.auth('https://api.github.com', repoOwner, repoName) // requesting data, func.auth is a function that provides authorization details
     request.get(requestData, function(err, response, body) {
@@ -26,7 +23,7 @@ function getRepoContributors(repoOwner, repoName, getUrls) {
         }
         var data = JSON.parse(body)
         if (data.message === "Bad credentials"){
-            throw new Error('You just played yourself. Make sure your token is correct \n Check out the .env file');
+            throw new Error("I made an env file for you \n please enter your credentials \n Please enter the following \n token = '\<YOUR TOKEN>'\ ");
         }
         if (!(response.headers.status === "200 OK")) {
             throw new Error('You just played yourself. Check if your github repo or github user really exists');

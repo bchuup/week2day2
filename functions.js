@@ -23,12 +23,24 @@ var getUrls = function (data){ //data is parsed body
 var downloadImageByURL = function (url, path, login, log) { //log is console.log
   fs.access(path, fs.F_OK, (err) => { // ask mentors how to read documentation re: fs.constants.F_OK
     if (err){
-    console.log(err ? 'There is no folder to put your pictures!' : 'can read/write')
+    console.log(err ? 'There is no folder to put your pictures! \n create a folder called avatars in directory' : 'can read/write')
     throw err
     } else {
     request(url)
     .pipe(fs.createWriteStream(path+`/${login}.png`))
     .on('close', function() {log("download complete")});
+    }
+  })
+}
+
+var createEnv = function () { //log is console.log
+  fs.access('.env', fs.F_OK, (err) => { // ask mentors how to read documentation re: fs.constants.F_OK
+    if (err){
+      fs.writeFile(".env", " ", function(err) {
+
+        if(err) {return console.log(err);}
+      })
+    throw err
     }
   })
 }
@@ -41,5 +53,6 @@ var downloadImageByURL = function (url, path, login, log) { //log is console.log
 module.exports = {
   auth: createAuthenticationObj,
   downloadimg: downloadImageByURL,
-  getUrls: getUrls
+  getUrls: getUrls,
+  createEnv: createEnv
 }
