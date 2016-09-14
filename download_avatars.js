@@ -9,8 +9,7 @@ token = process.env.token
 // console.log(token)
 
 
-function getRepoContributors(repoOwner, repoName, printing) {
-  // console.log(arguments.length)
+function getRepoContributors(repoOwner, repoName, getUrls) {
   if (!token){
       throw new Error('You have no token!');
   }
@@ -31,18 +30,14 @@ function getRepoContributors(repoOwner, repoName, printing) {
         }
         if (!(response.headers.status === "200 OK")) {
             throw new Error('You just played yourself. Check if your github repo or github user really exists');
-        } else {
-          // console.log("print pictures")
-          var urlList = [] 
-          for (var everyObject of data){
-            urlList.push(everyObject.avatar_url)
-          }
-            printing(null, urlList) // printing function refers to func.manyPrints- prints all files into picture folder
         }
+          // console.log("print pictures")
+            getUrls(data) // printing function refers to func.manyPrints- prints all files into picture folder
+
     })
 }
 // console.log(process.argv[4])
-getRepoContributors(process.argv[2], process.argv[3], func.manyPrints)
+getRepoContributors(process.argv[2], process.argv[3], func.getUrls)
 
 
 
